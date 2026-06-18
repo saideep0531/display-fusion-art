@@ -30,12 +30,23 @@ function LocationsPage() {
       <h1 className="font-display text-4xl font-semibold tracking-tight">Locations & screen walls</h1>
       <p className="mt-2 max-w-2xl text-muted-foreground">Each location maps to one screen-wall configuration. Edit inline; changes persist locally.</p>
 
-      <div className="mt-8 space-y-4">
+      <div className="mt-8 space-y-6">
         {data.locations.map((loc) => {
           const cfg = data.configs.find((c) => c.name === loc.configName);
           return (
-            <div key={loc.id} className="rounded-2xl border bg-card p-5">
-              <div className="grid gap-4 md:grid-cols-[1.5fr_1fr_1fr_auto]">
+            <div key={loc.id} className="overflow-hidden rounded-2xl border bg-card shadow-sm">
+              {loc.heroImage && (
+                <div className="relative h-40 w-full overflow-hidden">
+                  <img src={loc.heroImage} alt="" className="h-full w-full object-cover" loading="lazy" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-card via-card/40 to-transparent" />
+                  <div className="absolute bottom-3 left-5 right-5 flex items-end justify-between">
+                    <div className="font-display text-xl font-semibold text-white drop-shadow">{loc.name}</div>
+                    <span className="rounded-full bg-black/50 px-3 py-1 text-[10px] uppercase tracking-widest text-white/90 backdrop-blur">{loc.configName}</span>
+                  </div>
+                </div>
+              )}
+              <div className="p-5">
+              <div className="grid gap-4 md:grid-cols-[1.5fr_1fr_1fr_1.4fr_auto]">
                 <Field label="Name">
                   <input value={loc.name} onChange={(e) => updateLoc(loc.id, { name: e.target.value })} className="input" />
                 </Field>
@@ -47,6 +58,9 @@ function LocationsPage() {
                     {data.configs.map((c) => <option key={c.name} value={c.name}>{c.name} — {c.description ?? `${c.screens.length} screens`}</option>)}
                   </select>
                 </Field>
+                <Field label="Hero image URL">
+                  <input value={loc.heroImage ?? ""} onChange={(e) => updateLoc(loc.id, { heroImage: e.target.value })} className="input" placeholder="https://…" />
+                </Field>
                 <div className="flex items-end">
                   <button onClick={() => remove(loc.id)} className="rounded-md border border-destructive/30 px-3 py-2 text-sm text-destructive hover:bg-destructive/10">Remove</button>
                 </div>
@@ -57,6 +71,7 @@ function LocationsPage() {
                   <WallPreview cfg={cfg} />
                 </div>
               )}
+              </div>
             </div>
           );
         })}
