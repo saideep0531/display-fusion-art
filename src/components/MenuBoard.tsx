@@ -57,21 +57,14 @@ export function MenuBoard({ plan, restaurant, currency, scale = 1 }: Props) {
     <div
       className="board-surface relative overflow-hidden font-sans shadow-2xl ring-1 ring-black/40"
       style={{
-        width: screen.width * scale,
-        height: screen.height * scale,
-        // Render full-size and visually scale via transform when scale < 1
+        width: screen.width,
+        height: screen.height,
         transform: scale !== 1 ? `scale(${scale})` : undefined,
         transformOrigin: "top left",
       }}
     >
-      <div
-        style={{
-          width: screen.width,
-          height: screen.height,
-          transform: scale !== 1 ? `scale(${1})` : undefined,
-        }}
-        className={`flex h-full w-full flex-col ${d.pad}`}
-      >
+      <div className={`flex h-full w-full flex-col ${d.pad}`}>
+
         {/* Header */}
         <div className="flex items-end justify-between pb-4">
           <div>
