@@ -2,6 +2,7 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { AppShell } from "@/components/AppShell";
 import { useAppData } from "@/lib/store";
 import { planRender } from "@/lib/renderer";
+import heroHome from "@/assets/hero-home.jpg";
 
 export const Route = createFileRoute("/")({
   head: () => ({
