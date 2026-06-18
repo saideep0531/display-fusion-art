@@ -7,6 +7,7 @@ interface Props {
   currency: string;
   /** scale 1 = render at native screen resolution */
   scale?: number;
+  backgroundImage?: string;
 }
 
 const DENSITY: Record<
