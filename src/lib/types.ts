@@ -45,6 +45,7 @@ export interface ScreenConfig {
   name: string;
   description?: string;
   screens: Screen[];
+  backgroundImage?: string;
 }
 
 export interface DayState {
@@ -59,4 +60,5 @@ export interface Location {
   name: string;
   timezone: string;
   configName: string;
+  heroImage?: string;
 }

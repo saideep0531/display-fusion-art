@@ -107,7 +107,7 @@ function RenderPage() {
                   <span>{sp.screen.width}×{sp.screen.height} · {sp.density} · weight {sp.totalWeight.toFixed(1)}</span>
                 </div>
                 <div style={{ width: sp.screen.width * scale, height: sp.screen.height * scale, overflow: "hidden" }} className="rounded-xl">
-                  <MenuBoard plan={sp} restaurant={data.menu.restaurant} currency={data.menu.currency} scale={scale} />
+                  <MenuBoard plan={sp} restaurant={data.menu.restaurant} currency={data.menu.currency} scale={scale} backgroundImage={config.backgroundImage} />
                 </div>
               </div>
             );
