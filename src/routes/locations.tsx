@@ -116,10 +116,18 @@ function WallPreview({ cfg }: { cfg: ScreenConfig }) {
       {cfg.screens.map((s) => (
         <div
           key={s.id}
-          className="board-surface flex items-end justify-center rounded-md text-[10px] text-board-muted ring-1 ring-black/30"
+          className="board-surface relative flex items-end justify-center overflow-hidden rounded-md text-[10px] text-board-muted ring-1 ring-black/30"
           style={{ width: s.width * scale, height: s.height * scale }}
         >
-          <div className="pb-1">{s.id} · {s.width}×{s.height}</div>
+          {cfg.backgroundImage && (
+            <div
+              aria-hidden
+              className="absolute inset-0 bg-cover bg-center opacity-40"
+              style={{ backgroundImage: `url(${JSON.stringify(cfg.backgroundImage).slice(1, -1)})` }}
+            />
+          )}
+          <div aria-hidden className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent" />
+          <div className="relative pb-1 text-white/80">{s.id} · {s.width}×{s.height}</div>
         </div>
       ))}
     </div>
