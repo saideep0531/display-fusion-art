@@ -48,7 +48,7 @@ const DENSITY: Record<
   },
 };
 
-export function MenuBoard({ plan, restaurant, currency, scale = 1 }: Props) {
+export function MenuBoard({ plan, restaurant, currency, scale = 1, backgroundImage }: Props) {
   const { screen, groups, featured, density } = plan;
   const d = DENSITY[density];
   const cols = d.cols(screen.orientation);
@@ -64,7 +64,22 @@ export function MenuBoard({ plan, restaurant, currency, scale = 1 }: Props) {
         transformOrigin: "top left",
       }}
     >
-      <div className={`flex h-full w-full flex-col ${d.pad}`}>
+      {backgroundImage && (
+        <>
+          <div
+            aria-hidden
+            className="pointer-events-none absolute inset-0 bg-cover bg-center opacity-25"
+            style={{ backgroundImage: `url(${JSON.stringify(backgroundImage).slice(1, -1)})` }}
+          />
+          <div
+            aria-hidden
+            className="pointer-events-none absolute inset-0"
+            style={{ background: "linear-gradient(135deg, rgba(8,10,14,0.78) 0%, rgba(8,10,14,0.55) 50%, rgba(8,10,14,0.85) 100%)" }}
+          />
+        </>
+      )}
+      <div className={`relative flex h-full w-full flex-col ${d.pad}`}>
+
 
         {/* Header */}
         <div className="flex items-end justify-between pb-4">
