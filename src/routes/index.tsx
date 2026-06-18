@@ -60,17 +60,24 @@ function Dashboard() {
             const cfg = data.configs.find((c) => c.name === loc.configName);
             const plan = cfg ? planRender(data.menu, cfg, defaultState) : null;
             return (
-              <div key={loc.id} className="rounded-2xl border bg-card p-5 shadow-sm">
+              <div key={loc.id} className="overflow-hidden rounded-2xl border bg-card shadow-sm">
+                {loc.heroImage && (
+                  <div className="relative h-36 overflow-hidden">
+                    <img src={loc.heroImage} alt="" className="h-full w-full object-cover" loading="lazy" />
+                    <div className="absolute inset-0 bg-gradient-to-t from-card/90 to-transparent" />
+                    <span className={`chip ${plan?.ok ? "chip-ok" : "chip-warn"} absolute right-3 top-3 backdrop-blur`}>
+                      {plan?.ok ? "ready" : plan?.overflow ? "overflow" : "warn"}
+                    </span>
+                  </div>
+                )}
+                <div className="p-5">
                 <div className="flex items-start justify-between gap-3">
                   <div className="min-w-0">
                     <div className="truncate font-display text-lg font-semibold">{loc.name}</div>
                     <div className="text-xs uppercase tracking-widest text-muted-foreground">
-                      {loc.timezone} · config “{loc.configName}”
+                      {loc.timezone} · config "{loc.configName}"
                     </div>
                   </div>
-                  <span className={`chip ${plan?.ok ? "chip-ok" : "chip-warn"}`}>
-                    {plan?.ok ? "ready" : plan?.overflow ? "overflow" : "warn"}
-                  </span>
                 </div>
                 {plan && (
                   <dl className="mt-4 grid grid-cols-3 gap-3 text-sm">
@@ -90,6 +97,7 @@ function Dashboard() {
                   <Link to="/locations" className="rounded-md border px-3 py-1.5 text-sm font-medium hover:bg-muted">
                     Configure
                   </Link>
+                </div>
                 </div>
               </div>
             );
